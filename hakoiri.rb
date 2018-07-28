@@ -69,12 +69,17 @@ while i < states do
         strstate[ss] = states
         if /22.$/.match(ss) then
           STDERR.puts states
+          out = []
           while prev[states] do
-            output(statestr[states])
+            out.unshift statestr[states]
             states = prev[states]
           end
-          output(statestr[states])
+          out.unshift statestr[states]
+          out.each { |d|
+            output d
+          }
           exit
+
         end
         states += 1
         STDERR.puts states if states % 1000 == 0
